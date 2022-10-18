@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 1051783072}
   - component: {fileID: 1051783071}
   - component: {fileID: 1051783070}
+  - component: {fileID: 1051783073}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1127,6 +1128,7 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  ads: {fileID: 1051783073}
 --- !u!212 &1051783071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1194,6 +1196,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1051783073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051783069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29e1e720109e9d4385a0e2f532ab34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1070369211
 GameObject:
   m_ObjectHideFlags: 0

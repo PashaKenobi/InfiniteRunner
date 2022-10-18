@@ -23,10 +23,12 @@ public class Player : MonoBehaviour
 
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
+    public AdsManager ads;
 
     void Start()
     {
         gravity = -400;
+        ads.PlayBannerAd();
     }
     // Update is called once per frame
     void Update()
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
         if(pos.y < -20)
         {
             isDead = true;
+            ads.PlayAd();
         }
 
 
