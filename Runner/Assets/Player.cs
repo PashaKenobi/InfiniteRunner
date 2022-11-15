@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public float gravity = -100;
     public Vector2 velocity;
     public float maxAcceleraiton = 10;
@@ -20,15 +19,16 @@ public class Player : MonoBehaviour
     public float maxHold = 0.4f;
     public float time = 0.0f;
     public bool isDead = false;
+    public int numberOfCoins = 0;
 
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
+    public LayerMask coinLayerMask;
     public AdsManager ads;
 
     void Start()
     {
         gravity = -400;
-        ads.PlayBannerAd();
     }
     // Update is called once per frame
     void Update()
@@ -36,14 +36,14 @@ public class Player : MonoBehaviour
         if (isGrounded)
         {
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 isGrounded = false;
                 velocity.y = jumpVelocity;
                 isHoldingSpace = true;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             isHoldingSpace = false;
         }
@@ -163,6 +163,26 @@ public class Player : MonoBehaviour
                 hitBox(obstacle);
             }
         }
+        Vector2 coinOrigin = new(pos.x, pos.y);
+        RaycastHit2D coinHitX = Physics2D.Raycast(coinOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, coinLayerMask);
+        if (coinHitX.collider != null)
+        {
+            Obstacle coin = coinHitX.collider.GetComponent<Obstacle>();
+            if (coin != null)
+            {
+                points(coin);
+            }
+        }
+
+        RaycastHit2D coinHitY = Physics2D.Raycast(coinOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, coinLayerMask);
+        if (coinHitY.collider != null)
+        {
+            Obstacle coin = coinHitY.collider.GetComponent<Obstacle>();
+            if (coin != null)
+            {
+                points(coin);
+            }
+        }
 
         transform.position = pos;
     }
@@ -172,4 +192,10 @@ public class Player : MonoBehaviour
         Destroy(obstacle.gameObject);
         velocity.x *= 0.7f;
     }
+    void points(Obstacle coin)
+    {
+        Destroy(coin.gameObject);
+        numberOfCoins += 1;
+    }
+
 }

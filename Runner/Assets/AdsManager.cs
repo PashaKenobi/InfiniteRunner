@@ -10,7 +10,6 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         Advertisement.Initialize("4978153");
         Advertisement.AddListener(this);
-        PlayBannerAd();
     }
 
     // Update is called once per frame

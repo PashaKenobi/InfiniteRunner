@@ -13,6 +13,7 @@ public class Ground : MonoBehaviour
     bool didGenerateGround = false;
 
     public Obstacle boxTemp;
+    public Obstacle coin;
 
     private void Awake()
     {
@@ -105,5 +106,19 @@ public class Ground : MonoBehaviour
             Vector2 boxPos = new Vector2(x, y);
             box.transform.position = boxPos;
         }
+
+        int coinNum = Random.Range(0, 10);
+        for (int i = 0; i < coinNum; i++)
+        {
+            GameObject box = Instantiate(coin.gameObject);
+            float y = goGround.groundHeight + 3;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 boxPos = new Vector2(x, y);
+            box.transform.position = boxPos;
+        }
+
     }
 }
