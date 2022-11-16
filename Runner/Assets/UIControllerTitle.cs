@@ -19,6 +19,6 @@ public class UIControllerTitle : MonoBehaviour
 
     public void play()
     {
-       SceneManager.LoadScene("SampleScene");
+       SceneManager.LoadScene("Game");
     }
 }
