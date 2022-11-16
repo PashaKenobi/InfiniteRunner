@@ -16,6 +16,11 @@ public class UIController : MonoBehaviour
     public int distance;
     private void Awake()
     {
+        
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         player = GameObject.Find("Player").GetComponent<Player>();
         distanceText = GameObject.Find("DistanceText").GetComponent<Text>();
         finalDistanceText = GameObject.Find("FinalDistanceText").GetComponent<Text>();
@@ -23,11 +28,6 @@ public class UIController : MonoBehaviour
         FinalCoinText = GameObject.Find("CoinText").GetComponent<Text>();
         results = GameObject.Find("Results");
         results.SetActive(false);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
