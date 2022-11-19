@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
     public LayerMask coinLayerMask;
+    GroundFall falling;
     public AdsManager ads;
 
     void Start()
@@ -41,6 +42,11 @@ public class Player : MonoBehaviour
                 isGrounded = false;
                 velocity.y = jumpVelocity;
                 isHoldingSpace = true;
+                if(falling != null)
+                {
+                    falling.player = null;
+                    falling = null;
+                }
             }
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -58,12 +64,14 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if(pos.y < -20)
+        if (pos.y < -20)
         {
             isDead = true;
-            ads.PlayAd();
+            if (Random.Range(0, 2) == 0)
+            {
+                ads.PlayAd();
+            }
         }
-
 
         if (!isGrounded)
         {
@@ -97,6 +105,11 @@ public class Player : MonoBehaviour
                         velocity.y = 0;
                         isGrounded = true;
                         time = 0;
+                    }
+                    falling = ground.GetComponent<GroundFall>();
+                    if(falling != null)
+                    {
+                        falling.player = this;
                     }
                 }
             }
@@ -136,6 +149,10 @@ public class Player : MonoBehaviour
             Vector2 Origin = new(pos.x - 0.7f, pos.y);
             Vector2 Direction = Vector2.up;
             float Distance = velocity.y * Time.fixedDeltaTime;
+            if(falling != null)
+            {
+                Distance = -falling.fallSpeed * Time.fixedDeltaTime;
+            }
             RaycastHit2D hit2D = Physics2D.Raycast(Origin, Direction, Distance);
             if (hit2D.collider == null)
             {
