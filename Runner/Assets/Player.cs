@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
     public LayerMask coinLayerMask;
+    public Leaderboard leaderboard;
     GroundFall falling;
     public AdsManager ads;
 
@@ -67,6 +68,8 @@ public class Player : MonoBehaviour
         if (pos.y < -20)
         {
             isDead = true;
+            StartCoroutine(score());
+            leaderboard.SubmitScoreRoutine((int)distance);
             if (Random.Range(0, 2) == 0)
             {
                 ads.PlayAd();
@@ -213,6 +216,11 @@ public class Player : MonoBehaviour
     {
         Destroy(coin.gameObject);
         numberOfCoins += 1;
+    }
+
+    IEnumerator score()
+    {
+        yield return leaderboard.SubmitScoreRoutine((int)distance);
     }
 
 }

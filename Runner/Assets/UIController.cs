@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     Text finalDistanceText;
 
     GameObject results;
+    GameObject scoreboard;
     public int distance;
     private void Awake()
     {
@@ -28,7 +29,9 @@ public class UIController : MonoBehaviour
         CoinText = GameObject.Find("CoinNumber").GetComponent<Text>();
         FinalCoinText = GameObject.Find("CoinText").GetComponent<Text>();
         results = GameObject.Find("Results");
+        scoreboard = GameObject.Find("Score");
         results.SetActive(false);
+        scoreboard.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,6 +52,11 @@ public class UIController : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void Scoreboard()
+    {
+        results.SetActive(false);
+        scoreboard.SetActive(true);
     }
 
     public void Restart()
