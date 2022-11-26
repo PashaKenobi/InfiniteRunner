@@ -49,7 +49,7 @@ public class Leaderboard : MonoBehaviour
 
                 for (int i = 0; i < members.Length; i++)
                 {
-                    tempPlayerNames += members[i].rank + ". ";
+                    tempPlayerNames += members[i].rank + ".";
                     if (members[i].player.name != "")
                     {
                         tempPlayerNames += members[i].player.name;
