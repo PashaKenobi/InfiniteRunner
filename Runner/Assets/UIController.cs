@@ -27,6 +27,11 @@ public class UIController : MonoBehaviour
         distanceText = GameObject.Find("DistanceText").GetComponent<Text>();
         finalDistanceText = GameObject.Find("FinalDistanceText").GetComponent<Text>();
         CoinText = GameObject.Find("CoinNumber").GetComponent<Text>();
+        if (PlayerPrefs.HasKey("Coin"))
+        {
+            player.numberOfCoins = PlayerPrefs.GetInt("Coin");
+            CoinText.text = player.numberOfCoins.ToString();
+        }
         FinalCoinText = GameObject.Find("CoinText").GetComponent<Text>();
         results = GameObject.Find("Results");
         scoreboard = GameObject.Find("Score");

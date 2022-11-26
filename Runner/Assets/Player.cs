@@ -224,6 +224,7 @@ public class Player : MonoBehaviour
         audio.Play();
         Destroy(coin.gameObject);
         numberOfCoins += 1;
+        PlayerPrefs.SetInt("Coin", numberOfCoins);
     }
 
     IEnumerator score()
