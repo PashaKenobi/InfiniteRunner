@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     public LayerMask obstacleLayerMask;
     public LayerMask coinLayerMask;
     public Leaderboard leaderboard;
+    [SerializeField] private new AudioSource audio;
+    [SerializeField] private AudioSource Deathaudio;
+    [SerializeField] private AudioSource Jumpaudio;
     GroundFall falling;
     public AdsManager ads;
 
@@ -53,6 +56,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             isHoldingSpace = false;
+            Jumpaudio.time = 0.08f;
+            Jumpaudio.Play();
         }
     }
 
@@ -67,6 +72,8 @@ public class Player : MonoBehaviour
 
         if (pos.y < -20)
         {
+            Deathaudio.Play();
+            
             isDead = true;
             StartCoroutine(score());
             leaderboard.SubmitScoreRoutine((int)distance);
@@ -214,6 +221,7 @@ public class Player : MonoBehaviour
     }
     void points(Obstacle coin)
     {
+        audio.Play();
         Destroy(coin.gameObject);
         numberOfCoins += 1;
     }

@@ -9,6 +9,8 @@ public class Ground : MonoBehaviour
     public float groundRight;
     public float screenRight;
     new BoxCollider2D collider;
+    [SerializeField] private AudioSource Groundaudio;
+    UIController controller;
 
     bool didGenerateGround = false;
 
@@ -36,9 +38,9 @@ public class Ground : MonoBehaviour
     {
         Vector2 pos = transform.position;
         pos.x -= player.velocity.x * Time.fixedDeltaTime;
-
-        if(groundRight < 0)
+        if(groundRight < -15)
         {
+            Groundaudio.Stop();
             Destroy(gameObject);
             return;
         }
@@ -94,6 +96,7 @@ public class Ground : MonoBehaviour
         GroundFall fall = go.GetComponent<GroundFall>();
         if (fall != null)
         {
+            Groundaudio.Play();
             Destroy(fall);
             fall = null;
         }
